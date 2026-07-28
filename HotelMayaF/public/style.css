@@ -1,0 +1,133 @@
+:root {
+    /* Paleta de Colores Obligatoria */
+    --azul-medianoche: #0F1A24;
+    --dorado: #D4AF37;
+    --fondo: #F9F9F9;
+    --texto: #212121;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto);
+    font-family: 'Open Sans', sans-serif; /* */
+}
+
+/* Títulos y Encabezados */
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--azul-medianoche);
+}
+
+.navbar {
+    background-color: var(--azul-medianoche);
+}
+
+.navbar-brand {
+    color: var(--dorado) !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.btn-dorado {
+    background-color: var(--dorado);
+    color: var(--azul-medianoche);
+    font-weight: bold;
+    border: none;
+}
+
+.btn-dorado:hover {
+    background-color: #b3912a;
+    color: white;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+/* =========================================
+   FONDO EXCLUSIVO PARA LA PANTALLA DE LOGIN
+   ========================================= */
+#login-screen {
+    /* Llama a tu imagen */
+    background-image: url('fondo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Rompe los márgenes para cubrir toda la pantalla */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* Centra la tarjeta vertical y horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Oscurece un poco la imagen para que la tarjeta blanca resalte */
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: overlay;
+}
+
+/* Cambiamos el título a blanco para que se lea bien sobre la foto */
+#login-screen h1 {
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px !important;
+}
+
+/* Aseguramos que la tarjeta no se estire de más */
+#login-screen .card {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* --- Mejoras visuales e interacciones --- */
+.interactive-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.interactive-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+}
+
+.interactive-card h3.text-dorado {
+    color: var(--dorado) !important;
+}
+
+/* Decorador para las tarjetas de Mis Viajes generado en JS */
+.border-left-dorado {
+    border-left: 6px solid var(--dorado) !important;
+    border-radius: 8px;
+}
+
+/* --- Estilos del Footer --- */
+.footer-maya {
+    background-color: var(--azul-medianoche);
+    color: var(--fondo);
+}
+
+.footer-link {
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--dorado) !important;
+}
+
+.btn-outline-light {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background-color: var(--dorado);
+    border-color: var(--dorado);
+    color: var(--azul-medianoche);
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Victor David Lorenzo Cruz">
+    <title>Hotel Maya Bay | Reserva</title>
+
+    <link rel="icon" type="image/png" href="icono.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark d-none" id="mainNav">
+    <div class="container align-items-center">
+        <div class="d-flex align-items-center gap-3">
+            <span class="navbar-brand mb-0" style="pointer-events: none;">MAYA BAY</span>
+            <img src="logo.jpg" alt="Logo Maya Bay" style="height: 35px; width: auto; border-radius: 4px;">
+            <button class="btn btn-sm btn-outline-light" onclick="app.showScreen('home-screen')">INICIO</button>
+        </div>
+
+        <div class="d-flex gap-3 ms-auto">
+            <button class="btn btn-sm btn-warning d-none" id="btnAdminNav" onclick="app.showScreen('admin-screen')">Panel Admin</button>
+            <button class="btn btn-sm btn-outline-light" onclick="app.showScreen('history-screen')">Mis Viajes</button>
+            <button class="btn btn-sm btn-outline-light" onclick="app.showScreen('profile-screen')">Perfil</button>
+            <button class="btn btn-sm btn-danger" id="btnLogout">Salir</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <section id="login-screen" class="pantalla active text-center">
+        <h1 class="mb-4">Hotel Maya Bay</h1>
+        <div class="card mx-auto shadow border-0" style="max-width: 400px;">
+            <div class="card-body">
+                <form id="loginForm">
+    <input type="email" id="loginEmail" class="form-control mb-3" placeholder="Correo" required>
+    <input type="password" id="loginPass" class="form-control mb-3" placeholder="Contraseña" required>
+    <div class="d-flex gap-2 mb-2">
+        <button type="submit" class="btn btn-dark w-50">Entrar</button>
+        <button type="button" class="btn btn-outline-dark w-50" id="btnRegistrar">Registrarse</button>
+    </div>
+    
+    <div id="loginAlert"></div>
+</form>
+                <hr>
+                <p class="text-muted small">Ingreso rápido con redes</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-outline-dark"><i class="fab fa-facebook"></i></button>
+                    <button class="btn btn-outline-dark"><i class="fab fa-instagram"></i></button>
+                    <button class="btn btn-outline-dark"><i class="fab fa-x-twitter"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="home-screen" class="pantalla d-none">
+        <div class="position-relative mb-5 text-center rounded overflow-hidden shadow">
+            <img src="maya-bay.jpeg" class="img-fluid w-100" style="height: 350px; object-fit: cover; filter: brightness(0.6);" alt="Hotel 4 Estrellas">
+            <div class="position-absolute top-50 start-50 translate-middle w-100 px-4">
+                <h1 class="display-5 fw-bold text-white mb-3" style="text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">Bienvenidos a Hotel Maya Bay</h1>
+                <p class="lead text-light mx-auto" style="max-width: 800px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                    Descubre la perfecta armonía entre el lujo moderno y la serenidad de la naturaleza. Nuestro refugio exclusivo de 4 estrellas está diseñado para crear recuerdos inolvidables con confort absoluto y un servicio de clase mundial.
+                </p>
+            </div>
+        </div>
+
+        <div class="row text-center mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card p-4 shadow-sm h-100 interactive-card" onclick="app.showScreen('room-screen')">
+                    <h3 class="text-dorado"><i class="fas fa-bed mb-2 fa-lg"></i><br>Habitaciones</h3>
+                    <p class="text-muted">Filtra, elige y reserva tu estancia ideal.</p>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card p-4 shadow-sm h-100 interactive-card" onclick="app.showScreen('transfer-screen')">
+                    <h3 class="text-dorado"><i class="fas fa-shuttle-van mb-2 fa-lg"></i><br>Traslados</h3>
+                    <p class="text-muted">Agenda tu transporte seguro directo al hotel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="room-screen" class="pantalla d-none">
+        <h2>Reserva de Habitación</h2>
+        <form id="roomForm" class="card p-4 shadow-sm mb-4">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Fecha Entrada</label>
+                    <input type="date" id="roomCheckin" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Fecha Salida</label>
+                    <input type="date" id="roomCheckout" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Habitación (Máx 40 disponibles)</label>
+                    <select id="roomSelect" class="form-select" required>
+                        <option value="">Cargando...</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Huéspedes</label>
+                    <input type="number" id="roomGuests" class="form-control" min="1" max="4" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dorado w-100" id="btnBookRoom">Confirmar Reserva</button>
+            <div id="roomAlert" class="mt-2"></div>
+        </form>
+    </section>
+
+    <section id="transfer-screen" class="pantalla d-none">
+        <h2>Traslado al Aeropuerto</h2>
+        <div class="alert alert-info">Capacidad: 12 pasajeros por bloque de 20 min.</div>
+        <form id="transferForm" class="card p-4 shadow-sm">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Fecha del Vuelo</label>
+                    <input type="date" id="transDate" class="form-control" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Bloque Horario</label>
+                    <select id="transTime" class="form-select" required>
+                        <option value="14:00-14:20">14:00 - 14:20</option>
+                        <option value="14:20-14:40">14:20 - 14:40</option>
+                        <option value="14:40-15:00">14:40 - 15:00</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label>Pasajeros</label>
+                    <input type="number" id="transPax" class="form-control" min="1" max="12" required>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label>Maletas</label>
+                    <input type="number" id="transBags" class="form-control" min="0" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dorado w-100" id="btnBookTrans">Agendar Traslado</button>
+            <div id="transAlert" class="mt-2"></div>
+        </form>
+    </section>
+
+    <section id="history-screen" class="pantalla d-none">
+        <h2>Mis Viajes</h2>
+        <div id="historyList" class="row gap-3">
+            </div>
+    </section>
+
+<section id="profile-screen" class="pantalla d-none">
+        <h2>Mi Perfil</h2>
+        <div class="card p-4 shadow-sm mx-auto" style="max-width: 500px;">
+            <form id="perfilForm">
+                <div class="text-center mb-4">
+                    <i class="fas fa-user-circle fa-4x text-muted mb-2"></i>
+                    <h4 id="profileNameDisplay">Usuario</h4>
+                    <p id="profileEmail" class="text-muted">cargando...</p>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" id="perfilNombre" class="form-control" placeholder="Escribe tu nombre" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Teléfono / WhatsApp</label>
+                    <input type="tel" id="perfilTelefono" class="form-control" placeholder="Ej. 55 1234 5678">
+                </div>
+
+                <button type="submit" class="btn btn-dorado w-100" id="btnGuardarPerfil">Guardar Cambios</button>
+                <div id="perfilAlert" class="mt-3"></div>
+            </form>
+            
+            <hr class="mt-4">
+            <div class="text-center">
+                <h5>Soporte Oficial</h5>
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <a href="#" class="text-dark fs-3"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-dark fs-3"><i class="fab fa-facebook-messenger"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="admin-screen" class="pantalla d-none">
+        <h2>Panel de Administrador</h2>
+        <p class="text-muted">Vista general de todas las reservaciones del hotel.</p>
+        <div id="adminList" class="row gap-3">
+            </div>
+    </section>
+    
+<script type="module" src="app.js"></script>
+<footer id="mainFooter" class="footer-maya mt-5 pt-5 pb-3 d-none">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-dorado mb-3" style="font-family: 'Montserrat', sans-serif;">MAYA BAY</h5>
+                    <p class="text-light small">Tu escape perfecto. Lujo, confort y experiencias inolvidables a la orilla del paraíso.</p>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <h5 class="text-white mb-3">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none footer-link" onclick="app.showScreen('home-screen')">Inicio</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none footer-link" onclick="app.showScreen('room-screen')">Reservar Habitación</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none footer-link" onclick="app.showScreen('profile-screen')">Mi Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4 text-center text-md-end">
+                    <h5 class="text-white mb-3">Conecta con nosotros</h5>
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <button class="btn btn-outline-light rounded-circle"><i class="fab fa-facebook-f"></i></button>
+                        <button class="btn btn-outline-light rounded-circle"><i class="fab fa-instagram"></i></button>
+                        <button class="btn btn-outline-light rounded-circle"><i class="fab fa-x-twitter"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary mt-2 mb-3">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Hotel Maya Bay. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
